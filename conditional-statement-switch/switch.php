@@ -24,6 +24,9 @@ switch ($getal) {
 	case 7:
 		$string = 'zondag';
 		break;
+
+	default:
+		$string = "geen geldig getal";
 }
 
 ?>
