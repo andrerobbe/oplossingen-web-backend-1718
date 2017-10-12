@@ -16,7 +16,7 @@ $boodschappen[] = 'frisdrank';
 	<ul>
 		<?php $i = 0; ?>
 		<?php while ( $i < count($boodschappen) ) { ?>
-				<li><?php echo $boodschappen[$i]; ?><li>
+				<li><?php echo $boodschappen[$i]; ?></li>
 				<?php ++$i; ?>
 		<?php } ?>
 	</ul>
