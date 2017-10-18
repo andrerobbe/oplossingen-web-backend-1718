@@ -54,6 +54,17 @@ $articles = array(
                 De premier kreeg tijdens de interpellaties de steun van het voltallige kernkabinet, terwijl ook het grootste deel van de regering present tekende. N-VA-voorzitter Bart De Wever nam eveneens even zijn plaats op de achterste rij van het parlement in.")
 );
 
+    $one_article = false;
+
+    if ( isset( $_GET["id"] ) ) {
+        $id = $_GET["id"];
+
+        //check of id bestaat
+        if ( array_key_exists( $id , $articles ) ) {
+            $articles = array( $articles[$id] );
+            $one_article = true;
+        }
+    }
 
 ?>
 
@@ -67,17 +78,36 @@ $articles = array(
 	<link rel='stylesheet' href="http://web-backend.local/css/global.css">
 	<link rel='stylesheet' href="http://web-backend.local/css/facade.css">
 	<link rel='stylesheet' href="http://web-backend.local/css/directory.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<div>
-		<?php foreach ($articles as $id => $artikel) { ?>
-			<h1><?php echo $artikel["title"] ?></h1>
-			<img src="<?php echo $artikel["img"] ?>" alt="thumbnail">
-			<p><?php echo substr($artikel['txt'], 0, 50) . " ..."; ?></p>
-			<a href="index.php?id=<?php echo $id?>">Lees Meer</a>
+    <nav>
+        <ul>
+            <li><a href="index.php">Home</a></li>
+        </ul>
+    </nav>
+    <main>
+		<?php foreach ($articles as $id => $article) { ?>
+            <article class="<?php echo ( !$one_article ) ? 'multiple': 'single' ; ?>">
+    			<h1><?php echo $article["title"] ?></h1>
+    			<img src="<?php echo $article["img"] ?>" alt="thumbnail">
+                
+    			<p><?php 
+                if ( !$one_article ) {
+                    echo substr($article['txt'], 0, 50) . " ...";
+                }
+                else {
+                    echo $article["txt"];
+                } ?></p>
+
+                <?php 
+                if ( !$one_article ){ ?>
+                    <a href="index.php?id=<?php echo $id?>">Lees Meer</a>
+                <?php } ?>
+            </article>
 		<?php } ?>
 
-	</div>
+    </main>
 
 </body>
 </html>

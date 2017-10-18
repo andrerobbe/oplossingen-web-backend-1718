@@ -1,0 +1,46 @@
+main {
+	display: flex;
+}
+
+ .multiple
+{
+    float:left;
+    width:288px;
+    margin:16px;
+    padding:16px;
+    box-sizing:border-box;
+    background-color:#EEEEEE;
+}
+
+.multiple:nth-child(3n+1)
+{
+    margin-left:0px;
+}
+
+.multiple:nth-child(3n)
+{
+    margin-right:0px;
+}
+
+.single img
+{
+    float:right;
+    margin-left: 16px;
+}
+
+.multiple h1
+{
+    margin:0;
+    font-size:18px;
+}
+
+.read-more
+{
+    text-align:right;
+}
+
+.read-more:after
+{
+    padding-left:6px;
+    content:">";
+}
