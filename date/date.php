@@ -2,8 +2,6 @@
 	setlocale( 'LC_ALL', 'nld_nld' );
     $time = mktime("22","35","25","01","21","1904");
     $time_fix = strftime('%d %B %Y, %H:%M:%S %p', $time);
-
-
 ?>
 
 <!DOCTYPE html>
