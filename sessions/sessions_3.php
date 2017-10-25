@@ -1,16 +1,13 @@
 <?php
 	session_start();
 
-	if ( isset($_POST['submit']) ){
-		$_SESSION['registrationData']['deel2']['straat'] = $_POST['straat'];
-		$_SESSION['registrationData']['deel2']['nummer'] = $_POST['nummer'];
-		$_SESSION['registrationData']['deel2']['gemeente'] = $_POST['gemeente'];
-		$_SESSION['registrationData']['deel2']['postcode'] = $_POST['postcode'];
-	}
+	#POST gegevens in variablen steken.
+	$_SESSION['registrationData']['2']['straat'] = $_POST['straat'];
+	$_SESSION['registrationData']['2']['nummer'] = $_POST['nummer'];
+	$_SESSION['registrationData']['2']['gemeente'] = $_POST['gemeente'];
+	$_SESSION['registrationData']['2']['postcode'] = $_POST['postcode'];
 
 	$registrationData = $_SESSION['registrationData'];
-
-
 
 ?>
 
@@ -29,14 +26,13 @@
 	<h2>Overzicht</h2>
 
 	<ul>
-		<?php foreach( $registrationData as $Key => $Array ):  ?>
-			<?php foreach( $deelArray as $data => $value ):  ?>
-				<li>
-					<?= $data ?>: <?= $value ?>
-					<p><a href="sessions_<?= $Key ?>.php?focus=<?= $data ?>">wijzig</a></p>
-				</li>
-			<?php endforeach ?>
-		<?php endforeach ?>
+	<?php foreach( $registrationData as $Key => $Array ) {
+			foreach( $Array as $data => $value ) {
+				echo '<li>' . $data . ': '. $value;
+				echo '<br><a href="sessions_' . $Key . '.php?focus=' . $data . '">wijzig</a>';
+				echo '</li>';
+			}
+		} ?>
 	</ul>
 
 </body>

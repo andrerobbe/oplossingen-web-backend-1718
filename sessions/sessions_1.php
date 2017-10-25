@@ -1,8 +1,8 @@
 <?php
 	session_start();
 
-	$email = (isset($_SESSION['registrationData']['deel1']['email'])) ? $_SESSION['registrationData']['deel1']['email'] : '';
-	$nickname =	(isset($_SESSION['registrationData']['deel1']['nickname'])) ? $_SESSION['registrationData']['deel1']['nickname'] : '';
+	$email = (isset($_SESSION['registrationData']['1']['email'])) ? $_SESSION['registrationData']['1']['email'] : '';
+	$nickname =	(isset($_SESSION['registrationData']['1']['nickname'])) ? $_SESSION['registrationData']['1']['nickname'] : '';
 
 	if ( isset($_GET['session']) ){
 		if ( $_GET['session']  == 'destroy' ){

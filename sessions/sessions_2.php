@@ -1,18 +1,18 @@
 <?php
 	session_start();
 
-	if ( isset($_POST['submit']) ){
-		$_SESSION['registrationData']['deel1']['email'] = $_POST['email'];
-		$_SESSION['registrationData']['deel1']['nickname'] = $_POST['nickname'];
-	}
+	#POST gegevens in variable stoppen
+	$_SESSION['registrationData']['1']['email'] = $_POST['email'];
+	$_SESSION['registrationData']['1']['nickname'] = $_POST['nickname'];
 
-	$registrationData['deel1'] = $_SESSION['registrationData']['deel1'];
+	#deel 1
+	$registrationData['1'] = $_SESSION['registrationData']['1'];
 
-
-	$straat = (isset( $_SESSION['registrationData']['deel2']['straat'])) ? $_SESSION['registrationData']['deel2']['straat'] : '';
-	$nummer = (isset( $_SESSION['registrationData']['deel2']['nummer'])) ? $_SESSION['registrationData']['deel2']['nummer'] : '';
-	$gemeente = (isset( $_SESSION['registrationData']['deel2']['gemeente'])) ? $_SESSION['registrationData']['deel2']['gemeente'] : '';
-	$postcode = (isset( $_SESSION['registrationData']['deel2']['postcode'])) ? $_SESSION['registrationData']['deel2']['postcode'] : '';
+	#variable indien al ingevuld (wijziging aanbrengen)
+	$straat = (isset( $_SESSION['registrationData']['2']['straat'])) ? $_SESSION['registrationData']['2']['straat'] : '';
+	$nummer = (isset( $_SESSION['registrationData']['2']['nummer'])) ? $_SESSION['registrationData']['2']['nummer'] : '';
+	$gemeente = (isset( $_SESSION['registrationData']['2']['gemeente'])) ? $_SESSION['registrationData']['2']['gemeente'] : '';
+	$postcode = (isset( $_SESSION['registrationData']['2']['postcode'])) ? $_SESSION['registrationData']['2']['postcode'] : '';
 
 
 ?>
@@ -30,9 +30,9 @@
 <body>
 	<a href="sessions_1.php?session=destroy">Destroy sessie</a>
 	<ul>
-		<?php foreach( $registrationData['deel1'] as $data => $value ){  ?>
-		<li><?= $data ?>: <?= $value ?></li>
-		<?php } ?>
+		<?php foreach( $registrationData['1'] as $data => $value ){
+			echo '<li>' . $data . ': ' . $value . '</li>';
+		} ?>
 	</ul>
 
 	<h2>Deel 2: adres</h2>
