@@ -3,36 +3,40 @@
 
 	if( isset($_GET['logout']) ){
 
-		if($_GET['logout'] == '1'){
+		if( $_GET['logout'] ) {
 			#delete cookie
-			setcookie('username', "", time() - 1000 ); 
-			setcookie('password', "", time() - 1000 );
+			setcookie('authenticatie', "", time() - 1000 );
 			header('location: cookies.php');
 		}
 	}
 
-	$cookieDuration = 300;
+
+	$cookieDuration = 3;
 	$myfile = file_get_contents("bestand.txt");
 	$fileArray = explode(",",$myfile);
-	$valid = true;
+	$valid = false;
 	$fout = false;
 
-	if (isset($_POST["user"]) ) {
-		if($_POST["user"] == $fileArray[0] && $_POST["pw"] == $fileArray[1]) {
-			$valid = false;
-			setcookie('username', $fileArray[0], time() + $cookieDuration );
-			setcookie('password', $fileArray[1], time() + $cookieDuration );
 
-			$loggedIn = ( isset($_COOKIE['username']) ) ? $_POST['user'] : '';
-		}
-		else {
-			$fout = true;
+	if ( !isset($_COOKIE['authenticatie'])){
+		if (isset($_POST["submit"]) ) {
+			if($_POST["user"] == $fileArray[0] && $_POST["pw"] == $fileArray[1]) {
+				$valid = true;
+				setcookie('authenticatie', true, time() + $cookieDuration );
+
+				$username = ( isset($_COOKIE['authenticatie']) ) ? $_POST['user'] : '';
+			}
+			else {
+				$fout = true;
+			}
 		}
 	}
-
-
+	
+	if ( isset($_COOKIE['authenticatie'])){
+		$valid = true;
+		$username = ( isset($_COOKIE['authenticatie']) ) ? $fileArray[0] : '';
+	}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,9 +48,9 @@
 	<link rel='stylesheet' href="http://web-backend.local/css/directory.css">
 </head>
 <body>
-	<?php if(!$valid) { ?>
-		<?php if( isset($_COOKIE['username']) ) {
-			echo '<h1>Hallo ' . $loggedIn . '!</h1>';
+	<?php if($valid) { ?>
+		<?php if( isset($_COOKIE['authenticatie']) ) {
+			echo '<h1>Hallo ' . $username . '!</h1>';
 		}
 		else {
 			echo '<p>U bent ingelogd.</p>';
@@ -58,13 +62,13 @@
 		echo '<p>De gebruikersnaam en/of wachtwoord is fout.</p>';		
 	} ?>
 
-	<?php if($valid): ?>
+	<?php if(!$valid): ?>
 		<form action="cookies.php" method="post">
 		<label for="user">User:</label>
 		<input name="user" id="user" type="text"><br>
 		<label for="pw">Password:</label>
 		<input name="pw" id="pw" type="password"><br><br>
-		<button>Verzenden</button>
+		<button name="submit">Verzenden</button>
 		</form>
 	<?php endif; ?>
 
