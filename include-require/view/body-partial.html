@@ -1,0 +1,11 @@
+	<main>
+		<section>
+			<?php foreach ( $articles as $id => $article){
+			echo "<article>
+					<h1>" . $article[ 'title' ] . "</h1>
+					<p>" . $article[ 'txt' ] . "</p>
+					<p>" . $article[ 'tags' ] ."</p>
+				</article>";
+			}?>
+		</section>
+	</main>
