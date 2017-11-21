@@ -15,7 +15,7 @@
 	<link rel='stylesheet' href="http://web-backend.local/css/directory.css">
 </head>
 <body>
-	<a href="http://oplossingen2.web-backend.local">home</a>
+	<a href="../">home</a>
 	
 
 </body>
