@@ -7,17 +7,18 @@
 	<link rel='stylesheet' href="http://web-backend.local/css/global.css">
 	<link rel='stylesheet' href="http://web-backend.local/css/facade.css">
 	<link rel='stylesheet' href="http://web-backend.local/css/directory.css">
-	<link rel='stylesheet' href="css/global.css">
+	<?= $cssLinks ?>
 </head>
 <body>
 	<header>
 		<h1>André Maurits Robbe</h1>
 		<nav>			
 			<ul>
-				<li class="active"><a href="#">Galerij</a></li>
+				<li><a href="index.php">Galerij</a></li>
 				<li><a href="#">Blog</a></li>
-				<li><a href="#">Contact</a></li>
+				<li><a href="index.php?page=contact.partial">Contact</a></li>
 				<li><a href="http://oplossingen2.web-backend.local">PHP oefeningen</a></li>
 			</ul>
 		</nav>
 	</header>
+	<main>

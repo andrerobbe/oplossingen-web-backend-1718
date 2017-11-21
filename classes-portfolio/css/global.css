@@ -28,10 +28,10 @@ nav li {
 	list-style-type: none;
 }
 nav .active{
-	border-bottom: 3px solid #7C819B;
+	border-bottom: 3px solid orange;
 }
 nav li:hover{
-	border-bottom: 3px solid #7C819B;
+	border-bottom: 3px solid orange;
 }
 footer{
 	text-align: center;
@@ -55,11 +55,51 @@ main img {
 	height: 200px;
 	width: 200px;
 	object-fit: cover;
-	border: none;
+}
+main img:hover{
+	border-color: orange;
+	cursor: pointer;
 }
 div section{
-	width: 820px;
+	width: 825px;
 	position: relative;
 	left: 50%;
 	transform: translateX(-50%);
+}
+
+
+form {
+	margin: 0 auto;
+	width: 300px;
+}
+form input{
+	margin-bottom: 20px;
+	width: 300px;
+}
+form #question{
+	width: 300px;
+	height: 100px;
+	max-width: 300px;
+	min-width: 300px;
+	min-height: 50px;
+}
+form .buttonCenter{
+	text-align: center;
+	margin-top: 20px;
+}
+form button {
+	width: 100px;
+	height: 30px;
+	font-size: 1.1em;
+	border: none;
+	background-color: #44485C;
+	color: white;
+}
+form button:hover{
+	background-color: orange;
+	cursor: pointer;
+}
+form input:focus, form textarea:focus{
+	border-color: orange;
+	outline: none !important;
 }
