@@ -3,6 +3,7 @@
 
 		if( $_GET['logout'] ) {
 			setcookie('authenticatie', "", time() - 1000 );
+			setcookie('user', "", time() - 1000 );
 			header('location: cookies.php');
 		}
 	}
@@ -26,7 +27,6 @@
 
 	$valid = false;
 	$fout = false;
-	$counter = 0;
 
 	if ( !isset($_COOKIE['authenticatie'])){
 		if (isset($_POST["submit"]) ) {
@@ -36,8 +36,8 @@
 						$cookieDuration = 2592000;
 					}
 					setcookie('authenticatie', true, time() + $cookieDuration );
+					setcookie('user', $usernames[$j], time() + $cookieDuration );
 					$valid = true;
-					$counter = $j;
 				}
 				else {
 					$fout = true;
@@ -48,7 +48,7 @@
 	
 	if ( isset($_COOKIE['authenticatie'])){
 		$valid = true;
-		$username = $usernames[$counter];
+		$username = $_COOKIE['user'];
 	}
 ?>
 <!DOCTYPE html>
@@ -62,12 +62,16 @@
 	<link rel='stylesheet' href="http://web-backend.local/css/directory.css">
 </head>
 <body>
+	<a href="../">Home</a>
+	<br><br>
+
 	<?php if($valid) { ?>
 		<?php if( isset($_COOKIE['authenticatie']) ) {
 			echo '<h1>Hallo ' . $username . '!</h1>';
 		}
 		else {
 			echo '<p>U bent ingelogd.</p>';
+			echo '<p>Refresh om name te checken</p>';
 		}
 		echo '<a href="cookies.php?logout=1">Uitloggen</a>';
 	} 
