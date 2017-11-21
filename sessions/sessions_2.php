@@ -28,6 +28,7 @@
 	<link rel='stylesheet' href="http://web-backend.local/css/directory.css">
 </head>
 <body>
+	<a href="../">Home</a>
 	<a href="sessions_1.php?session=destroy">Destroy sessie</a>
 	<ul>
 		<?php foreach( $registrationData['1'] as $data => $value ){

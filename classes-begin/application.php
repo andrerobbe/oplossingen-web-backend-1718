@@ -28,8 +28,7 @@
  	</style>
 </head>
 <body>
-	<a href="http://oplossingen2.web-backend.local">home</a>
-	
+	<a href="../">home</a>	
 
 
 	<p>Hoeveel procent is <?= $x ?> van <?= $y ?></p>

@@ -33,7 +33,8 @@
 	<link rel='stylesheet' href="http://web-backend.local/css/directory.css">
 </head>
 <body>
-	<nav><a href="/post">Home</a></nav>
+	<nav><a href="../">Home</a></nav>
+	<nav><a href="/post">reset</a></nav>
 	<?php if( !$login ) {
 		echo '<h1>Inloggen</h1>';
 	}

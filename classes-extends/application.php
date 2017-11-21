@@ -35,7 +35,7 @@
 </style>
 </head>
 <body>
-	<a href="http://oplossingen2.web-backend.local">home</a>
+	<a href="../">home</a>
 	
 	<div>
 		<p>Animal class</p>

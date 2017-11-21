@@ -23,6 +23,7 @@
 	<link rel='stylesheet' href="http://web-backend.local/css/directory.css">
 </head>
 <body>
+	<a href="../">Home</a>
 	<a href="sessions_1.php?session=destroy">Destroy sessie</a>
 	<h2>Deel 1: registratie</h2>
 	<form action="sessions_2.php" method="post">
