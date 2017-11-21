@@ -41,8 +41,10 @@
 	else{
 		echo '<h2>' . $msg . '</h2>';
 	} ?>
-
+	
 	<?php if( $form ) { ?>
+	<?= 'user = ' . $username ?><br>
+	<?= 'pw = ' . $password ?>
 		<form action="index.php" method="post">
 			<p><label for="user">Gebruikersnaam:</label></p>
 			<p><input type="text" name="user" id="user"></p>
