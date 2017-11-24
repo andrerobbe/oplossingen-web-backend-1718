@@ -24,7 +24,6 @@
 		$error_msg = 'Connection to database failed: ' . $e->getMessage();
 
 	}
-
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +39,6 @@
 		tbody tr:nth-child(2n + 1), thead{
 			background-color: #F0F0F0;
 		}
-
 	</style>
 
 </head>
