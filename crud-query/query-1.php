@@ -37,7 +37,7 @@
 	<link rel='stylesheet' href="http://web-backend.local/css/directory.css">
 	<style>
 		tbody tr:nth-child(2n + 1), thead{
-			background-color: #F0F0F0;
+			background-color: #CACACA;
 		}
 	</style>
 
@@ -50,11 +50,9 @@
 		<thead>
 			<tr>
 				<?php 
-					echo "<tr>";
 					foreach($row[0] as $key3 => $bier) {
 						echo "<th>". $key3  . "</th>";
 					}
-					echo "</tr>";
 				?>
 			</tr>
 		</thead>
@@ -66,11 +64,9 @@
 					echo "<td>". $key2 ."</td>";
 				}
 				echo "</tr>";
-			}
-			?>
+			} ?>
 		</tbody>
 		<tfoot>
-			
 		</tfoot>
 	</table>
 </body>
