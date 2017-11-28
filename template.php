@@ -8,7 +8,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Template</title>
+	<title><?= $_SERVER['PHP_SELF'] ?></title>
 
 	<link rel='stylesheet' href="http://web-backend.local/css/global.css">
 	<link rel='stylesheet' href="http://web-backend.local/css/facade.css">

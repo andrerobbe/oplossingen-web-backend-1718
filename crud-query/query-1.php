@@ -15,7 +15,6 @@
 
 		$statement = $db->prepare($queryString);
 		$statement->execute();
-		$fetchAssoc = array();
 
 		$row = $statement->fetchAll(PDO::FETCH_ASSOC);
 	
