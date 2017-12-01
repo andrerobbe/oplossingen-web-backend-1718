@@ -60,21 +60,21 @@
 	<?php if (!$show): ?> <!-- als GET NIET geset is -->
 		<form action="query-2.php" method="GET">
 			<p>Selecteer een merk</p>
-			<select>
+			<select name="brouwernr">
 				<?php foreach ($row as $key => $brouwer): ?>
 					<option value="<?= $brouwer['brouwernr'] ?>"><?= $brouwer['brnaam'] ?></option>
 				<?php endforeach ?>
 			</select>
-			<button type="submit" value="<?= $brouwer['brouwernr']?>">Bieren van brouwerij</button>
-			<a href="query-2.php?brouwernr=1">go</a>
+			<button type="submit">Bieren van brouwerij</button>
 		</form>
 	<?php endif ?>
+	
 	<?php if ($show): ?> <!-- als GET geset is -->
 		<form action="query-2.php" method="GET">
 			<p>Geselecteerde merk</p>
 			<select><option value="<?= $_GET['brouwernr'] ?>"><?= $_GET['brouwernr'] ?><?php ?></option>
 			</select>
-			<button type="submit" value="">Zoek nieuwe brouwerij</button>
+			<button type="submit">Zoek nieuwe brouwerij</button>
 		</form>
 	<?php endif ?>
 
