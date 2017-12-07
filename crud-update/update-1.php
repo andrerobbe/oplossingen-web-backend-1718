@@ -1,7 +1,9 @@
 <?php
 	$msg 				= '';
 	$showConfirmation 	= false;
+	$showEditForm	 	= false;
 	$idToDelete 		= false;
+	$idToEdit	 		= false;
 
 	try {
 		$db = new PDO('mysql:host=localhost; dbname=bieren', 'root', '');
@@ -11,11 +13,32 @@
 			$idToDelete 		= $_POST['delete'];
 		}
 
-		if ( isset($_POST['confirmed']) ){
+		if ( isset($_POST['edit']) ){
+			$showEditForm	= true;
+			$idToEdit 		= $_POST['edit'];
+		}
+
+		if ( isset($_POST['edit-confirm']) ){
+			$brouwerUpdate	=	'DELETE FROM brouwers WHERE brouwernr = :brouwernr';
+
+			$updateStatement = $db->prepare( $brouwerUpdate );
+			$updateStatement->bindValue( ':brouwernr', $_POST['edit-confirm'] );
+			
+			$isUpdated = $updateStatement->execute();
+
+			if ( $isUpdated ){
+				$msg = 'Brouwerij succesvol geüpdate';
+			}
+			else{
+				$msg = 'Brouwerij is NIET geüpdate! ' . $updateStatement->errorInfo()[2];
+			}
+		}
+
+		if ( isset($_POST['delete-confirm']) ){
 			$brouwerDelete	=	'DELETE FROM brouwers WHERE brouwernr = :brouwernr';
 
 			$deleteStatement = $db->prepare( $brouwerDelete );
-			$deleteStatement->bindValue( ':brouwernr', $_POST['confirmed'] );
+			$deleteStatement->bindValue( ':brouwernr', $_POST['delete-confirm'] );
 			
 			$isDeleted = $deleteStatement->execute();
 
@@ -59,8 +82,12 @@
 			width: 150px;
 			padding: 10px;
 		}
-		.confirmation{
+		.confirmation {
 			background-color: #E66363 !important;
+			color: white;
+		}
+		.editing{
+			background-color: #63E679 !important;
 			color: white;
 		}
 		button img {
@@ -77,8 +104,23 @@
 	<?php if ($showConfirmation): ?>
 		<form method="POST" action="<?= $_SERVER['PHP_SELF'] ?>" class="confirm-form">
 			<p>Weet je het zeker?</p>
-			<button type="submit" name="confirmed" value="<?= $idToDelete ?>">Ja</button>
+			<button type="submit" name="delete-confirm" value="<?= $idToDelete ?>">Ja</button>
 			<button type="submit">Nee</button>
+		</form>
+	<?php endif ?>
+
+	<?php if ( $showEditForm ): ?>
+		<h1>Brouwerij <?= $idToEdit ?> wijzigen</h1>
+		<form method="POST" action="<?= $_SERVER['PHP_SELF'] ?>">
+			<?php foreach ($brouwers[$idToEdit-1] as $brouwerKey => $brouwerValues): ?>
+				<?php if ( $brouwerKey != 'brouwernr' ): ?>
+					<label for="<?= $brouwerKey ?>"><?= $brouwerKey ?></label>
+					<input type="text" name="<?= $brouwerKey ?>" id="<?= $brouwerKey ?>" value="<?= $brouwerValues ?>">
+				<?php endif ?>				
+			<?php endforeach ?>
+				<br><br>
+				<button type="submit" name="edit-confirm" value="<?= $idToEdit ?>">Update</button>
+				<br><br>
 		</form>
 	<?php endif ?>
 
@@ -96,17 +138,16 @@
 		</thead>
 		<tbody>
 			<?php foreach ($brouwers as $brouwerKey => $brouwerValues): ?>
-				<tr class="<?= ( $brouwerValues['brouwernr'] === $idToDelete ) ? 'confirmation' : ''?>">
-					<td><?= $brouwerKey ?></td>
-					<?php foreach ($brouwerValues as $keyBrouwerVal) {
+				<tr class="<?= ( $brouwerValues['brouwernr'] === $idToDelete ) ? 'confirmation' : ''?> <?= ( $brouwerValues['brouwernr'] === $idToEdit ) ? 'editing' : ''?>">
+					<?php $fixedKey = $brouwerKey + 1;
+					echo "<td>" . $fixedKey . "</td>";
+					foreach ($brouwerValues as $keyBrouwerVal) {
 						echo "<td>" . $keyBrouwerVal . "</td>";
 					} ?>
 					<td>
 						<button type="submit" name="delete" value="<?= $brouwerValues['brouwernr'] ?>">
 							<img src="icon-delete.png" alt="Delete button">
 						</button>
-					</td>
-					<td>
 						<button type="submit" name="edit" value="<?= $brouwerValues['brouwernr'] ?>">
 							<img src="icon-edit.png" alt="Edit button">
 						</button>
