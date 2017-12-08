@@ -42,7 +42,7 @@
 			</li>			
 			<li>
 				<label for="password">Paswoord</label>
-				<input type="text" name="password" id="password" value="<?= $password ?>">
+				<input type="<?= ( $password != '' ) ? 'text' : 'password' ?>" name="password" id="password" value="<?= $password ?>">
 				
 				<input type="submit" name="generate-password" value="Generate Password">
 			</li>		

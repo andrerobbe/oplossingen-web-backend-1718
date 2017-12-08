@@ -50,17 +50,4 @@
 		}
 		return $passwordStr;
 	}
-
-
  ?>
- <!DOCTYPE html>
- <html>
- <head>
- 	<title></title>
- </head>
- <body>
- 	<a href="../">home</a>
-	<a href="registratie.php">reset</a>
- 
- </body>
- </html>
