@@ -4,6 +4,26 @@
 	try {
 		$db = new PDO('mysql:host=localhost; dbname=bieren', 'root', '');
 
+		$thead = 'bieren.biernr';
+		$order = 'ASC';
+
+		if ( isset($_GET['orderBy']) ) {
+			$get = $_GET[ 'orderBy'];
+			$getExploded = explode("-", $get );
+			
+			$thead = $getExploded[0]; //tabelNaam
+			$order = $getExploded[1]; //ASC of DESC
+
+			if( $getExploded[1] != 'DESC' ) {
+				$order = 'DESC';
+			}
+			else {
+				$order = 'ASC';
+			}
+		}
+
+		$orderQuery = 'ORDER BY ' . $thead . ' ' . $order ;
+
 		$query	=	'SELECT bieren.biernr,
 							bieren.naam,
 							brouwers.brnaam,
@@ -13,7 +33,8 @@
 							INNER JOIN brouwers
 							ON bieren.brouwernr	= brouwers.brouwernr
 							INNER JOIN soorten
-							ON bieren.soortnr = soorten.soortnr ';
+							ON bieren.soortnr = soorten.soortnr '
+							. $orderQuery;
 
 		$statement = $db->prepare( $query );
 		$statement->execute();
@@ -41,15 +62,15 @@
 		}
 
 		.ascending a {
-			background:	no-repeat url('icon-asc.png') right ;
+			background:	url('icon-asc.png') no-repeat right;
 		}
 
 		.descending a {
-			background:	no-repeat url('icon-desc.png') right;
+			background: url('icon-desc.png') no-repeat right;
 		}
 
 		.selected {
-			background-color	:	lightgreen;
+			background-color: lightgreen;
 		}
 	</style>
 </head>
@@ -59,9 +80,11 @@
 
 	<table>
 		<thead>
-			<?php foreach ($bieren[0] as $key => $value) {
-				echo '<th class="order ' . /*( $order == "ASC" && $orderColumn == $bierenFieldnames[ $key ] ) ? "descending" : "ascending" . ( $orderColumn == $bierenFieldnames[ $key ] ) ? "selected" : "" .*/ '"><a href="' . $_SERVER["PHP_SELF"] . '?orderBy=' . $key . '">' . $key . '</a></th>';
-			} ?>
+			<?php foreach ($bieren[0] as $key => $value): ?>
+				<th class="order <?= ( $order == 'ASC' ) ? 'descending' : 'ascending' ?>">
+					<a href="<?= $_SERVER['PHP_SELF'] ?>?orderBy=<?= $key ?>-<?= $order ?>"><?= $key ?></a>
+				</th>
+			<?php endforeach ?>
 		</thead>
 		<tbody>
 			<?php foreach ($bieren as $keys => $bier) {
@@ -75,7 +98,5 @@
 		<tfoot>
 		</tfoot>
 	</table>
-	
-
 </body>
 </html>
