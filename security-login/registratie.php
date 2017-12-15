@@ -1,40 +1,43 @@
 <?php
 	session_start();
 
+	if ( isset($_COOKIE['login']) ) {
+		header('location: dashboard.php');
+	}
+	else{
+		$email 		=	'';
+		$password 	=	'';
+		$emailError	=	'';
+		$pwError	=	'';
+		$dbError	=	'';
 
-	$email 		=	'';
-	$password 	=	'';
-	$emailError	=	'';
-	$pwError	=	'';
-	$dbError	=	'';
+		if ( isset($_SESSION[ 'registration' ]) ){
+			$email 		=	$_SESSION[ 'registration' ]['email'];
+			$password 	=	$_SESSION[ 'registration' ]['password'];
 
-	if ( isset($_SESSION[ 'registration' ]) ){
-		$email 		=	$_SESSION[ 'registration' ]['email'];
-		$password 	=	$_SESSION[ 'registration' ]['password'];
-
-		if (isset($_SESSION[ 'error' ][ 'email' ]) ){
-			$emailError 		=	$_SESSION[ 'error' ][ 'email' ];
-			unset($_SESSION[ 'error' ][ 'email' ]);
+			if (isset($_SESSION[ 'error' ][ 'email' ]) ){
+				$emailError 		=	$_SESSION[ 'error' ][ 'email' ];
+				unset($_SESSION[ 'error' ][ 'email' ]);
+			}
+			if (isset($_SESSION[ 'error' ][ 'password' ]) ){
+				$pwError 		=	$_SESSION[ 'error' ][ 'password' ];
+				unset($_SESSION[ 'error' ][ 'password' ]);
+			}
+			if (isset($_SESSION[ 'error' ][ 'db' ]) ){
+				$dbError 		=	$_SESSION[ 'error' ][ 'db' ];
+				unset($_SESSION[ 'error' ][ 'db' ]);
+			}
 		}
-		if (isset($_SESSION[ 'error' ][ 'password' ]) ){
-			$pwError 		=	$_SESSION[ 'error' ][ 'password' ];
-			unset($_SESSION[ 'error' ][ 'password' ]);
-		}
-		if (isset($_SESSION[ 'error' ][ 'db' ]) ){
-			$dbError 		=	$_SESSION[ 'error' ][ 'db' ];
-			unset($_SESSION[ 'error' ][ 'db' ]);
+
+
+		#reset session
+		if ( isset($_GET['session']) ){
+			if ( $_GET['session']  == 'destroy' ){
+				session_destroy( );
+				header( 'location:registratie.php' );
+			}
 		}
 	}
-
-
-	#reset session
-	if ( isset($_GET['session']) ){
-		if ( $_GET['session']  == 'destroy' ){
-			session_destroy( );
-			header( 'location:registratie.php' );
-		}
-	}
-
 ?>
 
 <!DOCTYPE html>

@@ -64,9 +64,10 @@
 					if ( $isAdded ) {
 						$_SESSION[ 'register' ] = "User Created Successfully.";
 
-						$cookieDuration			= 2592000; #30 days
-						setcookie('login', $email . hash( 'sha512', $email ), $cookieDuration );
-						header('location: ' . $dashboardPage);
+						$cookieDuration			= time() + 2592000; #30 days
+						$cookieEmail			= $email . ',' . hash( 'sha512', $email ) . $salt;
+						setcookie('login', $cookieEmail, $cookieDuration );
+						header('location: ' . $dashboardPage);						
 					}
 					else {
 						$_SESSION[ 'register' ] = "User Registration Failed";
