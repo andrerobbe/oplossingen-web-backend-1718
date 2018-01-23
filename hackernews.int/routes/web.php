@@ -11,14 +11,26 @@
 |
 */
 
-Route::get('/', 'PageController@index');
-
-Route::get('/instructies', 'PageController@instructies');
-
-Route::get('/article/add', 'AddArticleController@addArticle');
 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 	'PageController@index');
 
 
+#instructions
+Route::get('/instructies', 'PageController@instructies');
+
+
+#Comments
+Route::post('comments/post', 'CommentController@post');
+Route::get('/comments/{id}', 'CommentController@show');
+
+
+#Articles
+Route::post('/addArticle',	'ArticleController@add');
+Route::get('/article/{id}',	'ArticleController@showForm');
+
+
+#Votes
+Route::put('vote/up/{id}',		'VoteController@up');
+Route::put('vote/down/{id}',	'VoteController@down');

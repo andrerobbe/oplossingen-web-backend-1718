@@ -15,7 +15,7 @@
             
             
             <!-- New Task Form -->
-            <form action="{{ url('/article/add') }}" method="POST" class="form-horizontal">
+            <form action="{{ url('/addArticle') }}" method="POST" class="form-horizontal">
                 <input type="hidden" name="_token" value="96ZPqN7yznrz9ZUc6fHgUdzfoy0anmbVOac0JMBD">
                 <!-- Article data -->
                 <div class="form-group">

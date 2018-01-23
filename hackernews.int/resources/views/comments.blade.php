@@ -1,11 +1,11 @@
-@extend('layouts.app')
+@extends('layouts.app')
 
 @section('content')
 <div class="col-md-10 col-md-offset-1">
     
     <div class="breadcrumb">
         
-        <a href="http://pascalculator.be/hackernews/public">← back to overview</a>
+        <a href="{{ url('/') }}">← back to overview</a>
     </div>
     <!-- Display Validation Errors -->
     <!-- resources/views/common/errors.blade.php -->

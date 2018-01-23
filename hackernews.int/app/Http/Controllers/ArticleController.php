@@ -1,10 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class HomeController extends Controller
+class ArticleController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -13,21 +13,22 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
-
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('index');
-    }
 
-    
-    public function instructies() {
-        return view('instructies');
-    }
+    public function showForm()
+	{
+		return view('addArticle');
+	}
+
+	public function add(Request $request)
+	{
+		return 'test';
+	}
+
 }
