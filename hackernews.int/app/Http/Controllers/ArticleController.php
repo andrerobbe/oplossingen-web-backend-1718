@@ -27,16 +27,7 @@ class ArticleController extends Controller
 	public function index()
 	{
 		$articles = Article::all();
-		$msg = "No article was found";
-
-		if (count($articles) > 0)
-		{
-			return view('index')->with('articles', $articles);
-		}
-		else
-		{
-			return view('index')->with('message', $returnMessage)->with('articles', $articles);
-		}
+		return view('index')->with('articles', $articles);
 	}
 
     public function showForm()
