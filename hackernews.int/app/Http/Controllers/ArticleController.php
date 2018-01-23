@@ -3,6 +3,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use \App\Article;
+use \App\User;
+
 
 class ArticleController extends Controller
 {
@@ -20,6 +23,21 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+	public function index()
+	{
+		$articles = Article::all();
+		$msg = "No article was found";
+
+		if (count($articles) > 0)
+		{
+			return view('index')->with('articles', $articles);
+		}
+		else
+		{
+			return view('index')->with('message', $returnMessage)->with('articles', $articles);
+		}
+	}
 
     public function showForm()
 	{

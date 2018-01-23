@@ -6,94 +6,84 @@
         <div class="panel-heading">Article overview</div>
         <div class="panel-content">
             <ul class="article-overview">
-                <li>
-                    <div class="vote">
-                        <form action="http://oplossingen2.web-backend.local/hackernews/public/vote/up" method="POST" class="form-inline upvote">
-                            <input type="hidden" name="_token" value="96ZPqN7yznrz9ZUc6fHgUdzfoy0anmbVOac0JMBD">
-                            <button name="article_id"value="1">
-                            <i class="fa fa-btn fa-caret-up" title="upvote"></i>
-                            </button>
-                        </form>
-                        <form action="http://oplossingen2.web-backend.local/hackernews/public/vote/down" method="POST" class="form-inline downvote">
-                            <input type="hidden" name="_token" value="96ZPqN7yznrz9ZUc6fHgUdzfoy0anmbVOac0JMBD">
-                            <button name="article_id"value="1">
-                            <i class="fa fa-btn fa-caret-down" title="downvote"></i>
-                            </button>
-                        </form>
-                    </div>
-                    <div class="url">
-                        <a href="http://arstechnica.com/gaming/2016/07/scythe-the-most-hyped-board-game-of-2016-delivers/" class="urlTitle">Scythe, the most-hyped board game of 2016, delivers</a>
-                    </div>
-                    <div class="info">
-                        5 points  | posted by Tomte | <a href="comments/1">2 comments</a>
-                    </div>
-                </li>
-                <li>
-                    <div class="vote">
-                        <form action="http://oplossingen2.web-backend.local/hackernews/public/vote/up" method="POST" class="form-inline upvote">
-                            <input type="hidden" name="_token" value="96ZPqN7yznrz9ZUc6fHgUdzfoy0anmbVOac0JMBD">
-                            <button name="article_id"value="2">
-                            <i class="fa fa-btn fa-caret-up" title="upvote"></i>
-                            </button>
-                        </form>
-                        <form action="http://oplossingen2.web-backend.local/hackernews/public/vote/down" method="POST" class="form-inline downvote">
-                            <input type="hidden" name="_token" value="96ZPqN7yznrz9ZUc6fHgUdzfoy0anmbVOac0JMBD">
-                            <button name="article_id"value="2">
-                            <i class="fa fa-btn fa-caret-down" title="downvote"></i>
-                            </button>
-                        </form>
-                    </div>
-                    <div class="url">
-                        <a href="https://pragprog.com/the-pragmatic-programmer/extracts/tips" class="urlTitle">Tips from the Pragmatic Programmer (2000)</a>
-                    </div>
-                    <div class="info">
-                        1 point  | posted by gasul | <a href="comments/2">1 comment</a>
-                    </div>
-                </li>
-                <li>
-                    <div class="vote">
-                        <form action="http://oplossingen2.web-backend.local/hackernews/public/vote/up" method="POST" class="form-inline upvote">
-                            <input type="hidden" name="_token" value="96ZPqN7yznrz9ZUc6fHgUdzfoy0anmbVOac0JMBD">
-                            <button name="article_id"value="7">
-                            <i class="fa fa-btn fa-caret-up" title="upvote"></i>
-                            </button>
-                        </form>
-                        <form action="http://oplossingen2.web-backend.local/hackernews/public/vote/down" method="POST" class="form-inline downvote">
-                            <input type="hidden" name="_token" value="96ZPqN7yznrz9ZUc6fHgUdzfoy0anmbVOac0JMBD">
-                            <button name="article_id"value="7">
-                            <i class="fa fa-btn fa-caret-down" title="downvote"></i>
-                            </button>
-                        </form>
-                    </div>
-                    <div class="url">
-                        <a href="http://webwereld.nl/hardware/103083-duur-werkgeheugen-dat-komt-door-google" class="urlTitle">Duur werkgeheugen? Dat komt door Google</a>
-                    </div>
-                    <div class="info">
-                        0 points  | posted by Thomas | <a href="comments/7">1 comment</a>
-                    </div>
-                </li>
-                <li>
-                    <div class="vote">
-                        <form action="http://oplossingen2.web-backend.local/hackernews/public/vote/up" method="POST" class="form-inline upvote">
-                            <input type="hidden" name="_token" value="96ZPqN7yznrz9ZUc6fHgUdzfoy0anmbVOac0JMBD">
-                            <button name="article_id"value="3">
-                            <i class="fa fa-btn fa-caret-up" title="upvote"></i>
-                            </button>
-                        </form>
-                        <form action="http://oplossingen2.web-backend.local/hackernews/public/vote/down" method="POST" class="form-inline downvote">
-                            <input type="hidden" name="_token" value="96ZPqN7yznrz9ZUc6fHgUdzfoy0anmbVOac0JMBD">
-                            <button name="article_id"value="3">
-                            <i class="fa fa-btn fa-caret-down" title="downvote"></i>
-                            </button>
-                        </form>
-                    </div>
-                    <div class="url">
-                        <a href="https://youtube-eng.blogspot.com/2016/08/youtubes-road-to-https.html" class="urlTitle">YouTube&#039;s road to HTTPS</a>
-                    </div>
-                    <div class="info">
-                        -1 point  | posted by gasul | <a href="comments/3">0 comments</a>
-                    </div>
-                </li>
+                @foreach ($articles as $article)
+                    <li>
+                        <!-- Checking for upvotes -->
+                        @if (Auth::check())
+                            <!--not allowed to vote on your own -->
+                            @if (auth()->user()->id == $article->user->id)
+                                <div class="vote">
+                                    <div class="form-inline upvote">
+                                        <button>
+                                            <i class="fa fa-btn disabled fa-caret-up" title="You can't upvote on your own articles!"></i>
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="form-inline downvote">
+                                        <button>
+                                        <i class="fa fa-btn disabled fa-caret-down" title="You can't downvote on your own aticles!"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            <!--Allowed to vote -->
+                            @else
+                                <div class="vote">
+                                    <form action="{{ url('vote/up/' . $article->id) }}" method="POST" class="form-inline upvote">
+                                        <input type="hidden" name="_method" value="PUT">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="vote" value="up">
+                                        <button name="article_id" value="{{ $article->id }}">
+                                            <i class="fa fa-btn fa-caret-up" title="upvote"></i>
+                                        </button>
+                                    </form>
+                                    <form action="{{ url('vote/down/' . $article->id) }}" method="POST" class="form-inline downvote">
+                                        <input type="hidden" name="_method" value="PUT">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="vote" value="down">
+                                        <button name="article_id" value="{{ $article->id }}">
+                                            <i class="fa fa-btn fa-caret-down" title="downvote"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            @endif
+
+                        <!-- Not allowed to vote > login required -->
+                        @else
+                            <div class="vote">
+                                <div class="form-inline upvote">
+                                    <button>
+                                        <i class="fa fa-btn disabled fa-caret-up" title="You need to log in to vote!"></i>
+                                    </button>
+                                </div>
+                                
+                                <div class="form-inline downvote">
+                                    <button>
+                                    <i class="fa fa-btn disabled fa-caret-down" title="You need to log in to vote!"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        @endif
+
+                        <div class="url" style="display: flex;">
+                            <a class="urlTitle" href="{{ $article->url }}">{{ $article->title }}</a>
+                            @if (Auth::check())
+                                @if (auth()->user()->id == $article->user->id)
+                                <form action="article/{{ $article->id }}" method="GET">
+                                    {{ csrf_field() }}
+                                    <button type="submit" class="btn btn-info btn-sm" style="margin: 10px; line-height: 100%;">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                                @endif
+                            @endif
+                        </div>
+
+                        <div class="info">
+                            {{ $article->votes }} points | posted by {{ $article->posted_by }} |
+                            <a href="comments/{{ $article->id }}">{{ $article->comment->count() }} comments</a>
+                        </div>
+                    </li>
+                @endforeach
             </ul>
         </div>
     </div>

@@ -13,12 +13,12 @@
 
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/', 	'PageController@index');
+Route::get('/home', 'ArticleController@index')->name('home');
+Route::get('/', 	'ArticleController@index');
 
 
-#instructions
-Route::get('/instructies', 'PageController@instructies');
+#Instructions
+Route::get('/instructies', 'InstructionController@show');
 
 
 #Comments
