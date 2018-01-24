@@ -33,4 +33,23 @@ class CommentController extends Controller
 
 		return back()->with('success', "Succesfully posted");
 	}
+
+	public function edit ($id)
+	{
+		$article 		= Article::find($id);
+		$comment 		= Comment::find($id);
+
+		return view('editComment')->with('comment', $comment->body)->with('article', $article);
+	}
+
+	public function update (Request $request, $id)
+	{
+		$article 		= Article::find($id);
+		$comment 		= Comment::find($id);
+		$comment->body 	= $request->comment;
+		$comment->save();
+
+		return redirect('comments/' . $comment->article_id)->with('article', $article)->with('success', 'Succesfully updated your comment!');
+    }
+
 }
