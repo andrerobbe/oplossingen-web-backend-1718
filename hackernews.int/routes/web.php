@@ -22,7 +22,7 @@ Route::get('/instructies', 'InstructionController@show');
 
 
 #Comments
-Route::post('comments/post', 'CommentController@post');
+Route::post('comments/add', 'CommentController@add');
 Route::get('/comments/{id}', 'CommentController@show');
 
 
