@@ -5,6 +5,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Comment;
 use App\Vote;
 use App\User;
+
+
 class Article extends Model
 {
     use SoftDeletes;

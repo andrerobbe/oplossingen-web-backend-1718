@@ -16,22 +16,24 @@
             
             <!-- New Task Form -->
             <form action="{{ url('/addArticle') }}" method="POST" class="form-horizontal">
-                <input type="hidden" name="_token" value="96ZPqN7yznrz9ZUc6fHgUdzfoy0anmbVOac0JMBD">
+                {{ csrf_field() }}
+
                 <!-- Article data -->
                 <div class="form-group">
                     <label for="article-title" class="col-sm-3 control-label">Title (max. 255 characters)</label>
                     <div class="col-sm-6">
-                        <input type="text" name="title" id="article-title" class="form-control">
+                        <input type="text" name="title" id="article-title" class="form-control" required>
                     </div>
                 </div>
                 
                 <!-- Article url -->
                 <div class="form-group">
-                    <label for="article-url" class="col-sm-3 control-label">URL</label>
+                    <label for="article-url" class="col-sm-3 control-label">URL (https://.. required)</label>
                     <div class="col-sm-6">
-                        <input type="text" name="url" id="article-url" class="form-control">
+                        <input type="text" name="url" id="article-url" class="form-control" required>
                     </div>
                 </div>
+
                 <!-- Add Article Button -->
                 <div class="form-group">
                     <div class="col-sm-offset-3 col-sm-6">
