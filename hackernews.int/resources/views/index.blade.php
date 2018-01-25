@@ -64,26 +64,57 @@
                             </div>
                         @endif
                         
-
-                        @if (Auth::check())
-                            @if (auth()->user()->id == $article->user->id)
-                                <div class="url" style="display: flex;">
-                                    <a class="urlTitle" href="{{ $article->url }}">{{ $article->title }}</a>
-
-                                    <form action="article/{{ $article->id }}/edit" method="GET">
+                        <!-- Title / Url -->
+                        <div class="url" style="display: flex;">
+                            <a class="urlTitle" href="{{ $article->url }}">{{ $article->title }}</a>
+                            @if (Auth::check())
+                                @if (auth()->user()->id == $article->user->id)
+                                    <!-- edit/delete buttons -->
+                                    <form action="article/{{ $article->id }}/edit" method="GET" style="margin: 10px 2px 0 5px">
                                         {{ csrf_field() }}
-                                        <button type="submit" class="btn btn-info btn-sm" style="margin: 12px; line-height: 50%;">
+                                        <button type="submit" class="btn btn-info btn-sm" style="line-height: 100%;">
                                             <i class="fa" aria-hidden="true"></i>edit
                                         </button>
                                     </form>
-                                </div>
+                                    <form action="article/{{ $article->id }}/delete" method="GET" style="margin-top: 10px;">
+                                        {{ csrf_field() }}
+                                        <button type="submit" class="btn btn-danger btn-sm" style="line-height: 100%;">
+                                            <i class="fa fa-trash" aria-hidden="true"></i> delete
+                                        </button>
+                                    </form>
+                                @endif
                             @endif
-                        @endif
-
+                        </div>
                         <div class="info">
                             {{ $article->votes }} points | posted by {{ $article->posted_by }} |
                             <a href="comments/{{ $article->id }}">{{ $article->comment->count() }} comments</a>
                         </div>
+
+                        <!-- delete box -->
+                        @if ($article->id == session('article-id'))
+                            @if(session('delete'))
+                                <div class="alert alert-danger" style="margin:5px 0px 0 0;">
+                                {{ session('delete') }}
+
+                                    <div style="display:flex">
+                                        <form action="article/{{ $article->id }}/confirm-delete" method="POST">
+                                        {{ csrf_field() }}
+                                            <button type="submit" class="btn btn-danger">
+                                            <i class="fa fa-trash" aria-hidden="true"></i> delete
+                                            </button>
+                                        </form>
+
+                                        <form action="{{ URL::previous() }}">
+                                        {{ csrf_field() }}
+                                            <button type="submit" class="btn btn-secondary">
+                                            <i class="fa fa-ban" aria-hidden="true"></i> Cancel
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            @endif
+                        @endif
+
                     </li>
                 @endforeach
             </ul>

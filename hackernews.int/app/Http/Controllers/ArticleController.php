@@ -70,4 +70,18 @@ class ArticleController extends Controller
         return redirect('/')->with('success', "Succesfully posted: " . $article->title);
 	}
 
+    public function delete($id)
+    {
+        $article = Article::find($id);
+
+        return redirect($article->id)->with('delete', 'Delete this comment?')->with('article-id', $id);
+    }
+
+    public function confirmDelete($id)
+    {
+        $article = Article::find($id);
+        $article->delete();
+
+        return redirect('/')->with('success', 'Succesfully deleted your article!');
+    }
 }

@@ -60,11 +60,11 @@ class CommentController extends Controller
 
 	public function confirmDelete($id)
 	{
-		$comment        = Comment::find($id);
-        $article_id      = $comment->article_id;
-        $comment->delete();
+		$comment 	= Comment::find($id);
+		$article_id	= $comment->article_id;
+		$comment->delete();
 
-        return redirect('comments/' . $article_id)->with('success', 'Succesfully deleted your comment!');
+		return redirect('comments/' . $article_id)->with('success', 'Succesfully deleted your comment!');
 	}
 
 }

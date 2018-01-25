@@ -23,7 +23,7 @@ Route::get('/instructies', 'InstructionController@show');
 
 #Comments
 Route::post('comments/add', 				'CommentController@add');
-Route::get('/comments/{id}', 				'CommentController@show');
+Route::get('comments/{id}', 				'CommentController@show');
 Route::get('comments/{id}/edit', 			'CommentController@edit');
 Route::post('comments/{id}/update', 		'CommentController@update');
 Route::get('comments/{id}/delete', 			'CommentController@delete');
@@ -31,10 +31,13 @@ Route::post('comments/{id}/confirm-delete', 'CommentController@confirmDelete');
 
 
 #Articles
-Route::post('/addArticle',			'ArticleController@add');
-Route::get('/article/{id}',			'ArticleController@showForm');
-Route::get('/article/{id}/edit',	'ArticleController@edit');
-Route::put('/article/{id}/update',	'ArticleController@update');
+Route::post('/addArticle',					'ArticleController@add');
+Route::get('/article/{id}',					'ArticleController@showForm');
+Route::get('/article/{id}/edit',			'ArticleController@edit');
+Route::put('/article/{id}/update',			'ArticleController@update');
+Route::get('article/{id}/delete', 			'ArticleController@delete');
+Route::post('article/{id}/confirm-delete',	'ArticleController@confirmDelete');
+Route::get('/{id}', 						'ArticleController@index');
 
 
 #Votes
