@@ -24,14 +24,16 @@
             <!-- votes -->
              @if (Auth::check())
                 <div class="vote">                        
-                    <form action="{{ url('/vote/up') }}" method="POST" class="form-inline upvote">
+                    <form action="{{ url('vote/up/' . $article->id) }}" method="POST" class="form-inline upvote">
+                        {{ method_field('PUT') }}
                         {{ csrf_field() }}
                         <button name="article_id"value="1">
                         <i class="fa fa-btn fa-caret-up" title="upvote"></i>
                         </button>
                     </form>
 
-                    <form action="{{ url('/vote/down') }}" method="POST" class="form-inline downvote">
+                    <form action="{{ url('vote/down/' . $article->id) }}" method="POST" class="form-inline downvote">
+                        {{ method_field('PUT') }}
                         {{ csrf_field() }}
                         <button name="article_id"value="1">
                         <i class="fa fa-btn fa-caret-down" title="downvote"></i>
