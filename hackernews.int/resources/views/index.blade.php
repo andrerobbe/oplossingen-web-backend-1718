@@ -2,13 +2,29 @@
 
 @section('content')
 <div class="col-md-10 col-md-offset-1">
+
+    @if ( session('succes') )
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                {{ $success }}
+            </div>
+        </div>
+    @endif
+    @if (isset($error))
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                {{ $error }}
+            </div>
+        </div>
+    @endif
+
     <div class="panel panel-default">
         <div class="panel-heading">Article overview</div>
         <div class="panel-content">
             <ul class="article-overview">
                 @foreach ($articles as $article)
                     <li>
-                        <!-- Checking for upvotes -->
+                        <!-- Checking for votes -->
                         @if (Auth::check())
                             <!--not allowed to vote on your own -->
                             @if (auth()->user()->id == $article->user->id)
@@ -29,19 +45,19 @@
                             @else
                                 <div class="vote">
                                     <form action="{{ url('vote/up/' . $article->id) }}" method="POST" class="form-inline upvote">
-                                        <input type="hidden" name="_method" value="PUT">
+                                        {{ method_field('PUT') }}
                                         {{ csrf_field() }}
                                         <input type="hidden" name="vote" value="up">
                                         <button name="article_id" value="{{ $article->id }}">
-                                            <i class="fa fa-btn fa-caret-up" title="upvote"></i>
+                                            <i class="fa fa-btn fa-caret-up" title="Upvote"></i>
                                         </button>
                                     </form>
                                     <form action="{{ url('vote/down/' . $article->id) }}" method="POST" class="form-inline downvote">
-                                        <input type="hidden" name="_method" value="PUT">
+                                        {{ method_field('PUT') }}
                                         {{ csrf_field() }}
                                         <input type="hidden" name="vote" value="down">
                                         <button name="article_id" value="{{ $article->id }}">
-                                            <i class="fa fa-btn fa-caret-down" title="downvote"></i>
+                                            <i class="fa fa-btn fa-caret-down" title="Downvote"></i>
                                         </button>
                                     </form>
                                 </div>

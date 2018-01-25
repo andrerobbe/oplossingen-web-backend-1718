@@ -66,7 +66,7 @@
             <div class="comments">
                 <ul>
                     @foreach ($article->comment as $comment)
-                    <li style="list-style-type: none">
+                    <li>
                         <div class="comment-body">{{ $comment->body }}</div>
                         <div class="comment-info">Posted by {{ $comment->user->name }} on {{ $article->created_at }}</div>
 
