@@ -63,20 +63,22 @@
                                 </div>
                             </div>
                         @endif
+                        
 
-                        <div class="url" style="display: flex;">
-                            <a class="urlTitle" href="{{ $article->url }}">{{ $article->title }}</a>
-                            @if (Auth::check())
-                                @if (auth()->user()->id == $article->user->id)
-                                <form action="article/{{ $article->id }}" method="GET">
-                                    {{ csrf_field() }}
-                                    <button type="submit" class="btn btn-info btn-sm" style="margin: 10px; line-height: 100%;">
-                                        <i class="fa" aria-hidden="true"></i>edit
-                                    </button>
-                                </form>
-                                @endif
+                        @if (Auth::check())
+                            @if (auth()->user()->id == $article->user->id)
+                                <div class="url" style="display: flex;">
+                                    <a class="urlTitle" href="{{ $article->url }}">{{ $article->title }}</a>
+
+                                    <form action="article/{{ $article->id }}/edit" method="GET">
+                                        {{ csrf_field() }}
+                                        <button type="submit" class="btn btn-info btn-sm" style="margin: 12px; line-height: 50%;">
+                                            <i class="fa" aria-hidden="true"></i>edit
+                                        </button>
+                                    </form>
+                                </div>
                             @endif
-                        </div>
+                        @endif
 
                         <div class="info">
                             {{ $article->votes }} points | posted by {{ $article->posted_by }} |

@@ -49,7 +49,7 @@ class CommentController extends Controller
 		$comment->save();
 
 		return redirect('comments/' . $comment->article_id)->with('success', 'Succesfully updated your comment!');
-    }
+	}
 
 	public function delete($id)
 	{

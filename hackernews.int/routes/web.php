@@ -31,8 +31,10 @@ Route::post('comments/{id}/confirm-delete', 'CommentController@confirmDelete');
 
 
 #Articles
-Route::post('/addArticle',	'ArticleController@add');
-Route::get('/article/{id}',	'ArticleController@showForm');
+Route::post('/addArticle',			'ArticleController@add');
+Route::get('/article/{id}',			'ArticleController@showForm');
+Route::get('/article/{id}/edit',	'ArticleController@edit');
+Route::put('/article/{id}/update',	'ArticleController@update');
 
 
 #Votes

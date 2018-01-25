@@ -36,6 +36,23 @@ class ArticleController extends Controller
 		return view('addArticle');
 	}
 
+    public function edit($id)
+    {
+        $article = Article::find($id);
+        return view('addArticle')->with('article', $article);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $article            = Article::find($id);
+
+        $article->title     = $request->title;
+        $article->url       = $request->url;
+        $article->save();
+
+        return redirect('/')->with('success', 'Succesfully updated your article!');
+    }
+
 	public function add(Request $request)
 	{
 		$request->validate([
