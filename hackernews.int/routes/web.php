@@ -22,12 +22,12 @@ Route::get('/instructies', 'InstructionController@show');
 
 
 #Comments
-Route::post('comments/add', 'CommentController@add');
-Route::get('/comments/{id}', 'CommentController@show');
-Route::get('comments/{id}/edit', 'CommentController@edit');
-Route::post('comments/{id}/update', 'CommentController@update');
-Route::get('comments/{id}/delete', 'CommentController@delete');
-
+Route::post('comments/add', 				'CommentController@add');
+Route::get('/comments/{id}', 				'CommentController@show');
+Route::get('comments/{id}/edit', 			'CommentController@edit');
+Route::post('comments/{id}/update', 		'CommentController@update');
+Route::get('comments/{id}/delete', 			'CommentController@delete');
+Route::post('comments/{id}/confirm-delete', 'CommentController@confirmDelete');
 
 
 #Articles

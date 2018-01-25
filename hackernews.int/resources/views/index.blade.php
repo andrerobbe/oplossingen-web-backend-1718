@@ -71,7 +71,7 @@
                                 <form action="article/{{ $article->id }}" method="GET">
                                     {{ csrf_field() }}
                                     <button type="submit" class="btn btn-info btn-sm" style="margin: 10px; line-height: 100%;">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                        <i class="fa" aria-hidden="true"></i>edit
                                     </button>
                                 </form>
                                 @endif

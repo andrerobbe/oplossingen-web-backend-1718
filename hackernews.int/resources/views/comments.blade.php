@@ -2,12 +2,19 @@
 
 @section('content')
 <div class="col-md-10 col-md-offset-1">
+
+    @if ( session('succes') )
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                {{ $success }}
+            </div>
+        </div>
+    @endif
     
     <div class="breadcrumb">
-        
         <a href="{{ url('/') }}">← back to overview</a>
     </div>
-    
+
     <div class="panel panel-default">
         <div class="panel-heading clearfix">
             {{ $article->title }}
@@ -69,21 +76,46 @@
                             <div style="display:flex;">
                                 <form action="{{ $comment->id }}/edit" method="GET" style="margin:0 2px 0 0;">
                                     {{ csrf_field() }}
-                                    <button type="submit" class="btn btn-info">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    <button type="submit" class="btn btn-info btn-sm" style="line-height: 100%;">
+                                        <i class="fa" aria-hidden="true"></i>edit
                                     </button>
                                 </form>
                                 <form action="{{ $comment->id }}/delete" method="GET">
                                     {{ csrf_field() }}
-                                    <button type="submit" class="btn btn-danger">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <button type="submit" class="btn btn-danger btn-sm" style="line-height: 100%;">
+                                        <i class="fa fa-trash" aria-hidden="true"></i> delete
                                     </button>
                                 </form>
                             </div>
                             @endif
                         @endif
-                    </li>
 
+                        <!-- delete box -->
+                        @if ($comment->id == session('comment-id'))
+                            @if(session('delete'))
+                                <div class="alert alert-danger" style="margin:5px 0px 0 0;">
+                                {{ session('delete') }}
+
+                                    <div style="display:flex">
+                                        <form action="{{ $comment->id }}/confirm-delete" method="POST">
+                                        {{ csrf_field() }}
+                                            <button type="submit" class="btn btn-danger">
+                                            <i class="fa fa-trash" aria-hidden="true"></i> delete
+                                            </button>
+                                        </form>
+
+                                        <form action="{{ URL::previous() }}">
+                                        {{ csrf_field() }}
+                                            <button type="submit" class="btn btn-secondary">
+                                            <i class="fa fa-ban" aria-hidden="true"></i> Cancel
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            @endif
+                        @endif
+
+                    </li>
                     @endforeach
                 </ul>
             </div>
@@ -104,7 +136,7 @@
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-6">
                             <button type="submit" class="btn btn-default">
-                                <i class="fa fa-plus">Add comment</i>
+                                <i class="fa fa-plus"></i> Add comment
                             </button>
                         </div>
                     </div>

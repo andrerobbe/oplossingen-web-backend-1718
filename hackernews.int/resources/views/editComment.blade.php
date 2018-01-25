@@ -7,9 +7,6 @@
         <a href="{{ url('/') }}">← back to overview</a>
     </div>
     <div class="panel panel-default">
-        <div class="panel-heading clearfix">
-            { $article->title }}
-        </div>
         <div class="panel-content">
             <form class="form-horizontal" method="POST" action="update">
                 {{ csrf_field() }}
@@ -24,7 +21,7 @@
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-4">
                         <button type="submit" class="btn btn-default">
-                            <span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>Update Comment
+                            <span><i class="fa" aria-hidden="true"></i></span>Update Comment
                         </button>
                     </div>
                 </div>

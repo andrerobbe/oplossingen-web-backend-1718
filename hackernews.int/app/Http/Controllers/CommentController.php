@@ -44,12 +44,27 @@ class CommentController extends Controller
 
 	public function update (Request $request, $id)
 	{
-		$article 		= Article::find($id);
 		$comment 		= Comment::find($id);
 		$comment->body 	= $request->comment;
 		$comment->save();
 
-		return redirect('comments/' . $comment->article_id)->with('article', $article)->with('success', 'Succesfully updated your comment!');
+		return redirect('comments/' . $comment->article_id)->with('success', 'Succesfully updated your comment!');
     }
+
+	public function delete($id)
+	{
+		$comment = Comment::find($id);
+
+		return redirect('comments/' . $comment->article_id)->with('delete', 'Delete this comment?')->with('comment-id', $id);
+	}
+
+	public function confirmDelete($id)
+	{
+		$comment        = Comment::find($id);
+        $article_id      = $comment->article_id;
+        $comment->delete();
+
+        return redirect('comments/' . $article_id)->with('success', 'Succesfully deleted your comment!');
+	}
 
 }
