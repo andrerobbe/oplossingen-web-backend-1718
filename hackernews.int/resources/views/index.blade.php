@@ -3,17 +3,10 @@
 @section('content')
 <div class="col-md-10 col-md-offset-1">
 
-    @if ( session('succes') )
+    @if ( session('success') )
         <div class="panel panel-success">
             <div class="panel-heading">
-                {{ $success }}
-            </div>
-        </div>
-    @endif
-    @if (isset($error))
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                {{ $error }}
+                {{ session('success') }}
             </div>
         </div>
     @endif

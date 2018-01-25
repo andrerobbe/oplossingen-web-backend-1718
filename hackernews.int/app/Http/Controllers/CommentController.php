@@ -31,7 +31,7 @@ class CommentController extends Controller
 		$comment->body          = $request->body;
 		$comment->save();
 
-		return back()->with('success', "Succesfully posted");
+		return back()->with('success', "Succesfully posted your comment!");
 	}
 
 	public function edit ($id)
@@ -66,5 +66,4 @@ class CommentController extends Controller
 
 		return redirect('comments/' . $article_id)->with('success', 'Succesfully deleted your comment!');
 	}
-
 }

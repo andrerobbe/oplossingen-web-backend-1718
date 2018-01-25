@@ -109,7 +109,6 @@
     <div id="app">
         @include('layouts.nav')
 
-
         <div class="container">
             <div class="row">
                 @yield('content')
@@ -117,7 +116,6 @@
         </div>
 
     </div>
-
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 </body>

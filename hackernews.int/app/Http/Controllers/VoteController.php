@@ -26,7 +26,7 @@ class VoteController extends Controller
 				$article->votes += 1;
 				$article->save();
 
-				return back();
+				return back()->with('success', 'Upvoted succesfully!');
 			}
 			#if user has DOWN voted (add +2 with upvote)
 			elseif ( $votes->votes === -1 ) {
@@ -35,7 +35,7 @@ class VoteController extends Controller
 				$article->votes += 2;
 				$article->save();
 
-				return back();
+				return back()->with('success', 'Changed your downvote into an upvote!');
 			}
 			#if user has ALREADY UP voted (remove vote)
 			else{
@@ -44,7 +44,7 @@ class VoteController extends Controller
 				$article->votes -= 1;
 				$article->save();
 
-				return back();
+				return back()->with('success', 'Removed your upvote!');
 			}
 		}
 		#if user has NEVER voted on this article
@@ -59,7 +59,7 @@ class VoteController extends Controller
 			$article->votes += 1;
 			$article->save();
 
-			return back();
+			return back()->with('success', 'Upvoted succesfully!');
 		}
 	}
 
@@ -80,7 +80,7 @@ class VoteController extends Controller
 				$article->votes -= 1;
 				$article->save();
 
-				return back();
+				return back()->with('success', 'Downvoted succesfully!');
 			}
 			#if user has UP voted (subtract -2 with downvote)
 			elseif ( $votes->votes === 1 ) {
@@ -90,7 +90,7 @@ class VoteController extends Controller
 				$article->votes -= 2;
 				$article->save();
 
-				return back();
+				return back()->with('success', 'Changed your upvote into a downvote!');
 			}
 			#if user has ALREADY DOWN voted (remove vote)
 			else{
@@ -99,7 +99,7 @@ class VoteController extends Controller
 				$article->votes += 1;
 				$article->save();
 
-				return back();
+				return back()->with('success', 'Removed your downvote!');
 			}
 		}
 		#if user has NEVER voted on this article
@@ -114,8 +114,7 @@ class VoteController extends Controller
 			$article->votes -= 1;
 			$article->save();
 
-			return back();
+			return back()->with('success', 'Downvoted succesfully!');
 		}
-
 	}
 }

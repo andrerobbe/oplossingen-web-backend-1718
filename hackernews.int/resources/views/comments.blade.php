@@ -3,21 +3,14 @@
 @section('content')
 <div class="col-md-10 col-md-offset-1">
 
-    @if ( session('succes') )
+    @if ( session('success') )
         <div class="panel panel-success">
             <div class="panel-heading">
-                {{ $success }}
+                {{ session('success') }}
             </div>
         </div>
     @endif
-    @if ( isset($succes) )
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                {{ $success }}
-            </div>
-        </div>
-    @endif
-    
+
     <div class="breadcrumb">
         <a href="{{ url('/') }}">← back to overview</a>
     </div>
@@ -99,7 +92,7 @@
                             @endif
                         @endif
 
-                        <!-- delete box -->
+                        <!-- delete -->
                         @if ($comment->id == session('comment-id'))
                             @if(session('delete'))
                                 <div class="alert alert-danger" style="margin:5px 0px 0 0;">
