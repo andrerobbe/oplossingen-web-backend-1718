@@ -10,6 +10,13 @@
             </div>
         </div>
     @endif
+    @if ( isset($succes) )
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                {{ $success }}
+            </div>
+        </div>
+    @endif
     
     <div class="breadcrumb">
         <a href="{{ url('/') }}">← back to overview</a>

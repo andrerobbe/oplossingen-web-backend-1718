@@ -74,7 +74,7 @@ class ArticleController extends Controller
     {
         $article = Article::find($id);
 
-        return redirect($article->id)->with('delete', 'Delete this comment?')->with('article-id', $id);
+        return redirect($article->id)->with('delete', 'Delete this article?')->with('article-id', $id);
     }
 
     public function confirmDelete($id)
